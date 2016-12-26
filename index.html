@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+   <head>
+      <meta charset="UTF-8" />
+      <title>A date range picker for Bootstrap</title>
+      <link href="node_module/extras/css/bootstrap.min.css" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" media="all" href="daterangepicker.css" />
+      <script type="text/javascript" src="node_module/extras/js/jquery-1.11.3.min.js"></script>
+      <script type="text/javascript" src="node_module/extras/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="moment.js"></script>
+      <script type="text/javascript" src="daterangepicker.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+   </head>
+   <body style="margin: 30px 0">
+
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-4 demo hide">
+            <input type="text" id="___config-demo" class="form-control">
+            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+          </div>
+
+          <div class="col-md-4"></div>
+
+          <div class="col-md-4">
+            <div style="display: inline-block;">
+              <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                <div class="text-center">
+                  <i class="glyphicon glyphicon-calendar fa fa-calendar pull-left"></i>&nbsp;
+                  <span class="date-range"></span> <b class="caret pull-right" style="margin-top: 8px;"></b>
+                </div>
+                  <div class="compared-date-range">compared to <span></span></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <style type="text/css">
+      .daterangepicker .compared-date-range{
+        display: none;
+        font-size: 12px; 
+        font-style: italic;
+      }
+      .daterangepicker .calendars_container{
+        /*position: relative;
+        top: 250px;*/
+        right: 100px;
+      }
+      .daterangepicker .seperate_calendar{
+/*        float: none;*/
+        right: 0;
+        position: absolute;
+        color: inherit;
+        background-color: #fff;
+        border-radius: 4px;
+        border: 1px solid rgba(0,0,0,.15);
+        -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        box-shadow: 0 6px 12px rgba(0,0,0,.175);
+      }
+      .daterangepicker .calendars_container .calendar:before, .daterangepicker .calendars_container .calendar:after{
+        position: absolute;
+        display: inline-block;  
+        border-bottom-color: rgba(0, 0, 0, 0.2);
+        content: '';
+      }
+      .daterangepicker .calendars_container .calendar:before{
+        top: -7px;
+        border-right: 7px solid transparent;
+        border-left: 7px solid transparent;
+        border-bottom: 7px solid #ccc;
+      }
+      .daterangepicker .calendars_container .calendar:after{
+        top: -6px;
+        border-right: 6px solid transparent;
+        border-bottom: 6px solid #fff;
+        border-left: 6px solid transparent;
+      }
+      .daterangepicker .calendars_container .calendar.left:before{
+        right: 124px;
+      }
+      .daterangepicker .calendars_container .calendar.left:after{
+        right: 125px;
+      }
+      .daterangepicker .calendars_container .calendar.calendar-range-right:before{
+        right: 44px;
+      }
+      .daterangepicker .calendars_container .calendar.calendar-range-right:after{
+        right: 45px;
+      }
+      .daterangepicker .ranges .range_inputs{
+        width: 160px;
+        margin: 0 1px;
+      }
+      .daterangepicker .ranges .range_inputs .calendar{
+        /*display: block;*/
+      }
+      .daterangepicker .ranges .daterangepicker_input{
+        margin-bottom: 10px;
+      }
+      .daterangepicker .ranges .range_inputs input:first-child{
+        margin-right: 5px;
+      }
+      .daterangepicker .ranges .range_inputs input{
+        width: 47%;
+        float: left;
+        padding: 0 6px;
+      }
+
+      </style>
+
+      <script type="text/javascript">
+      $(document).ready(function() {
+
+        var start = moment().subtract(29, 'days');
+        var end = moment();
+
+        function cb(start, end, label, comparedStart, comparedEnd, comparedLabel) {
+            console.log(arguments);
+            // $('#config-demo span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+
+            $('#reportrange span.date-range').html(start.format('MMM D, YYYY') + ' - ' + end.format('MMM D, YYYY'));
+              $('#reportrange span.date-range').html((label == 'Custom Range') ? start.format('MMM D, YYYY') + ' - ' + end.format('MMM D, YYYY') : label);
+
+            if(typeof comparedStart == 'object'){
+                $('#reportrange .compared-date-range').show();
+                // $('#reportrange .compared-date-range span').html(comparedStart.format('MMM D, YYYY') + ' - ' + comparedEnd.format('MMM D, YYYY'));
+                $('#reportrange .compared-date-range span').html((comparedLabel == 'Custom Range') ? comparedStart.format('MMM D, YYYY') + ' - ' + comparedEnd.format('MMM D, YYYY') : comparedLabel);
+
+            } else {
+              $('#reportrange .compared-date-range').hide();
+            }
+        }
+
+        $('#config-demo, #reportrange').daterangepicker({
+            startDate: start,
+            endDate: end,
+            showDropdowns: true,
+            showWeekNumbers: true,
+            autoApply: true,
+            singleDateRangePicker: true,
+            locale: {
+              applyLabel: 'Submit',
+              daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+              monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+              firstDay: 1,
+              compare: {
+                comparisonLabel: "Compare to past",
+              }
+            },
+            ranges: {
+              'Yesterday':  [moment().subtract(1, 'days'), moment().subtract(1, 'days').endOf('day')],
+              'Last 7 Days': [moment().subtract(7, 'days'), moment().subtract(1, 'days').endOf('day')],
+              'Last 14 Days': [moment().subtract(14, 'days'), moment().subtract(1, 'days').endOf('day')],
+              'Last 30 Days': [moment().subtract(30, 'days'), moment().subtract(1, 'days').endOf('day')],
+            },
+            compare: {
+                enable: true,
+                displayStyle: "dropdown",
+                ranges: {
+                  'Last 30 Daysd': [moment().subtract(30, 'days'), moment().subtract(1, 'days').endOf('day')],
+               }
+            },
+
+            template: '<div class="daterangepicker dropdown-menu">' +
+                '<div class="ranges">' +
+                  '<div class="range_inputs">' +
+                    '<div class="calendar">' + // fix for input fields as per latest version
+                      '<div class="daterangepicker_input clearfix">' +
+                        //'<label for="daterangepicker_start"></label>' +
+                        '<input class="input-mini" type="text" name="daterangepicker_start" value="" />' +
+                      // '</div>' +
+                      // '<div class="daterangepicker_input">' +
+                        //'<label for="daterangepicker_end"></label>' +
+                        '<input class="input-mini" type="text" name="daterangepicker_end" value="" />' +
+                      '</div>' +
+                    '</div>' +  
+                    '<button class="applyBtn" disabled="disabled"></button>&nbsp;' +
+                    '<button class="cancelBtn"></button>' +
+                  '</div>' +
+                '</div>' +
+
+                '<div class="calendars_container">' +
+                  '<div class="calendar seperate_calendar left">' +
+                    '<div class="daterangepicker_input">' +
+                      '<div class="calendar-time">' +
+                        '<div></div>' +
+                        '<i class="fa fa-clock-o glyphicon glyphicon-time"></i>' +
+                      '</div>' +
+                    '</div>' +
+                    '<div class="calendar-table"></div>' +
+                  '</div>' +
+
+                  '<div class="calendar right hide">' +
+                      '<div class="daterangepicker_input">' +
+                        '<div class="calendar-time">' +
+                          '<div></div>' +
+                          '<i class="fa fa-clock-o glyphicon glyphicon-time"></i>' +
+                        '</div>' +
+                      '</div>' +
+                      '<div class="calendar-table"></div>' +
+                  '</div>' +
+                '</div>' +
+
+              '</div>'
+        }, cb);
+
+        cb(start, end);
+
+
+        jQuery('body').on('click', '.daterangepicker .ranges, #reportrange', function (e) {
+
+          var cont = jQuery('.daterangepicker');
+          var startPos = cont.find('.range_inputs [name="daterangepicker_start"]').offset();
+          var startHeight = cont.find('.range_inputs [name="daterangepicker_start"]').height();
+          if(startPos.top > 0){
+            cont.find('.calendar.seperate_calendar').css({top: (startPos.top - startHeight) + 'px'});
+          }
+        });
+
+      });
+      </script>
+
+   </body>
+</html>

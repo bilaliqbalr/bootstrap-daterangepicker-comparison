@@ -176,34 +176,72 @@
   float: none;
   margin: 4px;
   text-align: left; }
-  .ranges ul {
+  .ranges > ul {
     list-style: none;
     margin: 0 auto;
     padding: 0;
     width: 100%; }
-  .ranges li {
+    .ranges > ul > li {
+      font-size: 13px;
+      background-color: #f5f5f5;
+      border: 1px solid #f5f5f5;
+      border-radius: 4px;
+      color: #08c;
+      padding: 3px 12px;
+      margin-bottom: 8px;
+      cursor: pointer; }
+      .ranges > ul > li:hover {
+        background-color: #08c;
+        border: 1px solid #08c;
+        color: #fff; }
+      .ranges > ul > li.active {
+        background-color: #08c;
+        border: 1px solid #08c;
+        color: #fff; }
+  .ranges .date-range-comparison-dropdown {
+    margin: 0 auto;
+    display: none;
+    padding: 3px 0px;
+    margin-bottom: 8px;
+    cursor: pointer; }
+    .ranges .date-range-comparison-dropdown button {
+      white-space: normal;
+      font-size: 13px;
+      width: 100%;
+      text-align: left; }
+  .ranges .date-range-comparison-list li {
     font-size: 13px;
-    background-color: #f5f5f5;
-    border: 1px solid #f5f5f5;
-    border-radius: 4px;
-    color: #08c;
+    color: #666;
     padding: 3px 12px;
     margin-bottom: 8px;
     cursor: pointer; }
-    .ranges li:hover {
-      background-color: #08c;
-      border: 1px solid #08c;
-      color: #fff; }
-    .ranges li.active {
-      background-color: #08c;
-      border: 1px solid #08c;
-      color: #fff; }
+    .ranges .date-range-comparison-list li:hover {
+      background-color: #eee;
+      color: #333; }
+  .ranges .date-range-enable-comparison {
+    margin: 0 auto;
+    font-size: 13px;
+    margin-bottom: 8px;
+    background-color: transparent !important;
+    color: #666; }
+    .ranges .date-range-enable-comparison label {
+      cursor: pointer;
+      margin: 0; }
+      .ranges .date-range-enable-comparison label input {
+        position: relative;
+        top: 1px; }
+  .ranges.list .date-range-comparison-list {
+    display: none; }
+  .ranges.list.comparison-enabled .date-range-comparison-list {
+    display: block; }
+  .ranges.comparison-enabled .date-range-comparison-dropdown {
+    display: block; }
 
 /*  Larger Screen Styling */
 @media (min-width: 564px) {
   .daterangepicker {
     width: auto; }
-    .daterangepicker .ranges ul {
+    .daterangepicker .ranges ul, .daterangepicker .ranges .date-range-enable-comparison, .daterangepicker .ranges .date-range-comparison-dropdown {
       width: 160px; }
     .daterangepicker.single .ranges ul {
       width: 100%; }
@@ -267,3 +305,5 @@
     float: right; }
   .daterangepicker .calendar.left {
     clear: none !important; } }
+
+/*# sourceMappingURL=daterangepicker.css.map */

@@ -25,8 +25,5 @@
   "dependencies": {
     "jquery": ">=1.10",
     "moment": "^2.9.0"
-  },
-  "devDependencies": {
-    "node-sass": "^3.4.2"
   }
 }
