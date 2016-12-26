@@ -1,9 +1,10 @@
 /**
-* @version: 2.1.24
-* @author: Dan Grossman http://www.dangrossman.info/
-* @copyright: Copyright (c) 2012-2016 Dan Grossman. All rights reserved.
+* @version: 1.0.0
+* @author: Bilal Iqbal http://www.phalcosoft.com/
+* @copyright: Copyright (c) 2012-2016 Phalcosoft. All rights reserved.
 * @license: Licensed under the MIT license. See http://www.opensource.org/licenses/mit-license.php
-* @website: https://www.improvely.com/
+* @website: https://www.phalcosoft.com/
+* This plugin is the extended version of Bootstrap date range picker based on https://github.com/dangrossman/bootstrap-daterangepicker
 */
 // Follow the UMD template https://github.com/umdjs/umd/blob/master/templates/returnExportsGlobal.js
 (function (root, factory) {
